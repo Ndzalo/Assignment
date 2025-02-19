@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Assignment.Views.ProfilePage"
+             Title="ProfilePage">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#e6f2ff" Offset="0.0" />
+            <GradientStop Color="#cce6ff" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <!-- Back Button -->
+            <Button Text="Back to Shopping"
+                    Clicked="OnBackClicked"
+                    HorizontalOptions="Start"
+                    BackgroundColor="#00bcd4"
+                    TextColor="White"
+                    CornerRadius="20"
+                    Margin="0,0,0,20"/>
+
+            <!-- Profile Picture with Edit Icon -->
+            <Frame HeightRequest="160" 
+                   WidthRequest="160" 
+                   CornerRadius="80" 
+                   HasShadow="True"
+                   BorderColor="#00bcd4"
+                   BackgroundColor="#ffffff"
+                   HorizontalOptions="Center" 
+                   Margin="0,0,0,30">
+                <Grid>
+                    <Image x:Name="ProfileImage"
+                           Aspect="AspectFill">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnProfileImageTapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+            </Frame>
+
+            <!-- Name Field -->
+            <Frame Padding="15" 
+                   HasShadow="True"
+                   BackgroundColor="#cce6ff"
+                   BorderColor="#99ccff"
+                   CornerRadius="15">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Name" 
+                           FontAttributes="Bold" 
+                           TextColor="#004d99"/>
+                    <Entry x:Name="NameEntry" 
+                           Placeholder="Enter your name"
+                           TextColor="#004d99"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Surname Field -->
+            <Frame Padding="15" 
+                   HasShadow="True"
+                   BackgroundColor="#cce6ff"
+                   BorderColor="#99ccff"
+                   CornerRadius="15">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Surname" 
+                           FontAttributes="Bold" 
+                           TextColor="#004d99"/>
+                    <Entry x:Name="SurnameEntry" 
+                           Placeholder="Enter your surname"
+                           TextColor="#004d99"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Email Field -->
+            <Frame Padding="15" 
+                   HasShadow="True"
+                   BackgroundColor="#cce6ff"
+                   BorderColor="#99ccff"
+                   CornerRadius="15">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Email" 
+                           FontAttributes="Bold" 
+                           TextColor="#004d99"/>
+                    <Entry x:Name="EmailEntry" 
+                           Keyboard="Email"
+                           Placeholder="Enter your email"
+                           TextColor="#004d99"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Bio Field -->
+            <Frame Padding="15" 
+                   HasShadow="True"
+                   BackgroundColor="#cce6ff"
+                   BorderColor="#99ccff"
+                   CornerRadius="15">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Bio" 
+                           FontAttributes="Bold" 
+                           TextColor="#004d99"/>
+                    <Editor x:Name="BioEditor" 
+                           HeightRequest="100"
+                           Placeholder="Write something about yourself"
+                           TextColor="#004d99"
+                           AutoSize="TextChanges"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Save Button -->
+            <Button Text="Save Profile" 
+                    Clicked="OnSaveClicked"
+                    HorizontalOptions="Center"
+                    BackgroundColor="#00bcd4"
+                    TextColor="White"
+                    WidthRequest="220"
+                    HeightRequest="55"
+                    CornerRadius="30"
+                    Margin="0,20,0,20"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

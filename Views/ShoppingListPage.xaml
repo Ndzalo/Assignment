@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Assignment.Views.ShoppingListPage"
+             Title="Tech Shop"
+             BackgroundColor="#f8f8f8">
+
+    <Grid RowDefinitions="Auto,*">
+        <HorizontalStackLayout Padding="10" Spacing="10" BackgroundColor="#007BFF">
+            <Button Text="Shopping Cart" 
+                    Clicked="OnCartClicked"
+                    HorizontalOptions="Start"
+                    BackgroundColor="White"
+                    TextColor="#007BFF"
+                    CornerRadius="20"
+                    Padding="10"/>
+            <Button Text="Profile" 
+                    Clicked="OnProfileClicked"
+                    HorizontalOptions="End"
+                    BackgroundColor="White"
+                    TextColor="#007BFF"
+                    CornerRadius="20"
+                    Padding="10"/>
+        </HorizontalStackLayout>
+
+        <CollectionView Grid.Row="1" 
+                        x:Name="ShoppingItemsCollection"
+                        Margin="10"
+                        BackgroundColor="White">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="10" Padding="15" BorderColor="#ccc" CornerRadius="10" HasShadow="True">
+                        <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,Auto">
+                            <!-- Item Image -->
+                            <Frame Grid.Column="0" Grid.RowSpan="3" Padding="0" CornerRadius="10" HasShadow="False" BorderColor="Transparent">
+                                <Image Source="{Binding ImageUrl}"
+                                       Aspect="AspectFill"
+                                       HeightRequest="80"
+                                       WidthRequest="80"/>
+                            </Frame>
+
+                            <!-- Item Details -->
+                            <VerticalStackLayout Grid.Column="1" Margin="10,0">
+                                <Label Text="{Binding Name}" 
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       TextColor="#333"/>
+                                <Label Text="{Binding Description}"
+                                       FontSize="14"
+                                       TextColor="#666"/>
+                                <Label Text="{Binding Price, StringFormat='${0:N2}'}"
+                                       FontSize="16"
+                                       TextColor="#007BFF"
+                                       FontAttributes="Bold"/>
+                            </VerticalStackLayout>
+
+                            <!-- Add to Cart Button -->
+                            <Button Text="Add to Cart"
+                                    Clicked="OnAddToCartClicked"
+                                    Grid.Column="2"
+                                    Grid.RowSpan="3"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="#007BFF"
+                                    TextColor="White"
+                                    CornerRadius="20"
+                                    Padding="10,5"
+                                    VerticalOptions="Center"
+                                    WidthRequest="120"
+                                    HeightRequest="40"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="Refresh" 
+Clicked="OnResetClicked"
+HorizontalOptions="End"/>
+    </Grid>
+</ContentPage>

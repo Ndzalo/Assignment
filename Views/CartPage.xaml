@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Assignment.Views.CartPage"
+             Title="Shopping Cart"
+             BackgroundColor="#f8f8f8">
+
+    <Grid RowDefinitions="*, Auto">
+        <!-- Cart Items List -->
+        <CollectionView x:Name="CartItemsCollection"
+                        Grid.Row="0"
+                        Margin="10"
+                        BackgroundColor="White">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout HorizontalOptions="Center" 
+                                     VerticalOptions="Center">
+                    <Label Text="Your cart is empty"
+                           FontSize="18"
+                           TextColor="Gray"
+                           HorizontalOptions="Center"/>
+                    <Button Text="Start Shopping"
+                            Clicked="OnBackToShoppingClicked"
+                            Margin="0,20,0,0"
+                            BackgroundColor="#007BFF"
+                            TextColor="White"
+                            CornerRadius="20"
+                            Padding="10"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="10" 
+                           Padding="10" 
+                           BorderColor="#ccc" 
+                           CornerRadius="10" 
+                           HasShadow="True">
+                        <Grid ColumnDefinitions="Auto,*,Auto" 
+                              RowDefinitions="Auto, Auto">
+                            <!-- Item Image -->
+                            <Frame Grid.Column="0" Grid.RowSpan="2" Padding="0" CornerRadius="10" HasShadow="False" BorderColor="Transparent">
+                                <Image Source="{Binding ItemImageUrl}"
+                                       Aspect="AspectFill"
+                                       HeightRequest="60"
+                                       WidthRequest="60"/>
+                            </Frame>
+
+                            <!-- Item Details -->
+                            <VerticalStackLayout Grid.Column="1" 
+                                                 Grid.RowSpan="2"
+                                                 Margin="10,0">
+                                <Label Text="{Binding ItemName}" 
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       TextColor="#333"/>
+                                <Label Text="{Binding TotalPrice, StringFormat='${0:N2}'}"
+                                       TextColor="#666666"
+                                       FontSize="14"/>
+                            </VerticalStackLayout>
+
+                            <!-- Quantity Adjustment -->
+                            <HorizontalStackLayout Grid.Column="2" 
+                                                   Grid.Row="0"
+                                                   Spacing="5"
+                                                   Margin="10,0">
+                                <Button Text="-" 
+                                        Clicked="OnDecreaseQuantityClicked" 
+                                        CommandParameter="{Binding .}" 
+                                        BackgroundColor="#ffcccc" 
+                                        TextColor="#ff4444" 
+                                        WidthRequest="30"
+                                        HeightRequest="30"
+                                        CornerRadius="15"
+                                        FontAttributes="Bold"
+                                        FontSize="18"/>
+                                <Label Text="{Binding Quantity}" 
+                                       VerticalOptions="Center" 
+                                       HorizontalOptions="Center"
+                                       FontAttributes="Bold"
+                                       FontSize="16"/>
+                                <Button Text="+" 
+                                        Clicked="OnIncreaseQuantityClicked" 
+                                        CommandParameter="{Binding .}" 
+                                        BackgroundColor="#ccffcc" 
+                                        TextColor="#44aa44" 
+                                        WidthRequest="30"
+                                        HeightRequest="30"
+                                        CornerRadius="15"
+                                        FontAttributes="Bold"
+                                        FontSize="18"/>
+                            </HorizontalStackLayout>
+
+                            <!-- Remove Button -->
+                            <Button Grid.Column="2"
+                                    Grid.Row="1"
+                                    Text="X"
+                                    BackgroundColor="#ff4444"
+                                    TextColor="White"
+                                    Clicked="OnRemoveItemClicked"
+                                    CommandParameter="{Binding .}"
+                                    HeightRequest="30"
+                                    WidthRequest="30"
+                                    Margin="5,0,0,0"
+                                    CornerRadius="15"
+                                    FontAttributes="Bold"
+                                    FontSize="18"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Cart Summary -->
+        <Frame Grid.Row="1" 
+               Padding="20" 
+               BorderColor="#ccc"
+               Margin="10"
+               CornerRadius="10">
+            <Grid ColumnDefinitions="*, Auto" 
+                  RowDefinitions="Auto, Auto">
+                <Label Text="Total Items:" 
+                       Grid.Column="0" 
+                       Grid.Row="0"
+                       FontSize="16"/>
+                <Label x:Name="TotalItemsLabel" 
+                       Grid.Column="1" 
+                       Grid.Row="0"
+                       FontSize="16"/>
+                <Label Text="Total Amount:" 
+                       Grid.Column="0" 
+                       Grid.Row="1"
+                       FontAttributes="Bold"
+                       FontSize="18"/>
+                <Label x:Name="TotalAmountLabel" 
+                       Grid.Column="1" 
+                       Grid.Row="1"
+                       FontAttributes="Bold"
+                       FontSize="18"/>
+            </Grid>
+        </Frame>
+    </Grid>
+</ContentPage>
