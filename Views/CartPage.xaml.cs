@@ -62,12 +62,12 @@ public partial class CartPage : ContentPage
             decimal totalAmount = _cartItems.Sum(i => i.TotalPrice);
 
             TotalItemsLabel.Text = totalItems.ToString();
-            TotalAmountLabel.Text = $"${totalAmount:N2}";
+            TotalAmountLabel.Text = $"R{totalAmount:N2}";
         }
         else
         {
             TotalItemsLabel.Text = "0";
-            TotalAmountLabel.Text = "$0.00";
+            TotalAmountLabel.Text = "R0.00";
         }
     }
 
@@ -107,7 +107,7 @@ public partial class CartPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await LoadCartAsync(); // Changed to async method
+        await LoadCartAsync(); // async method
     }
 
     private async void OnIncreaseQuantityClicked(object sender, EventArgs e)
@@ -195,4 +195,32 @@ public partial class CartPage : ContentPage
             }
         }
     }
+    private async void OnCheckoutClicked(object sender, EventArgs e)
+    {
+        if (_cartItems == null || !_cartItems.Any())
+        {
+            await DisplayAlert("Empty Cart", "Your cart is empty. Add items before checking out.", "OK");
+            return;
+        }
+
+        bool confirm = await DisplayAlert("Checkout", "Proceed to checkout?", "Yes", "No");
+
+        if (confirm)
+        {
+            try
+            {
+                // Here, you could navigate to a payment page or process the checkout
+                await DisplayAlert("Success", "Checkout completed successfully!", "OK");
+
+                // Clear the cart after checkout
+                await _databaseService.ClearCartAsync(_currentProfile.Id);
+                await LoadCartAsync();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", "Checkout failed: " + ex.Message, "OK");
+            }
+        }
+    }
+
 }

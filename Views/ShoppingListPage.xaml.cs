@@ -62,6 +62,8 @@ public partial class ShoppingListPage : ContentPage
             await _databaseService.AddToCartAsync(cartItem);
             await DisplayAlert("Success", "Item added to cart!", "OK");
             LoadData(); // Refresh the list to show updated stock
+            await Shell.Current.GoToAsync("CartPage");
+
         }
         catch (Exception ex)
         {

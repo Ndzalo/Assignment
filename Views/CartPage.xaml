@@ -5,7 +5,7 @@
              Title="Shopping Cart"
              BackgroundColor="#f8f8f8">
 
-    <Grid RowDefinitions="*, Auto">
+    <Grid RowDefinitions="*, Auto, Auto, Auto">
         <!-- Cart Items List -->
         <CollectionView x:Name="CartItemsCollection"
                         Grid.Row="0"
@@ -35,7 +35,7 @@
                            CornerRadius="10" 
                            HasShadow="True">
                         <Grid ColumnDefinitions="Auto,*,Auto" 
-                              RowDefinitions="Auto, Auto">
+                              RowDefinitions="Auto, Auto, Auto">
                             <!-- Item Image -->
                             <Frame Grid.Column="0" Grid.RowSpan="2" Padding="0" CornerRadius="10" HasShadow="False" BorderColor="Transparent">
                                 <Image Source="{Binding ItemImageUrl}"
@@ -57,52 +57,77 @@
                                        FontSize="14"/>
                             </VerticalStackLayout>
 
-                            <!-- Quantity Adjustment -->
-                            <HorizontalStackLayout Grid.Column="2" 
-                                                   Grid.Row="0"
-                                                   Spacing="5"
-                                                   Margin="10,0">
-                                <Button Text="-" 
-                                        Clicked="OnDecreaseQuantityClicked" 
-                                        CommandParameter="{Binding .}" 
-                                        BackgroundColor="#ffcccc" 
-                                        TextColor="#ff4444" 
-                                        WidthRequest="30"
-                                        HeightRequest="30"
-                                        CornerRadius="15"
-                                        FontAttributes="Bold"
-                                        FontSize="18"/>
-                                <Label Text="{Binding Quantity}" 
-                                       VerticalOptions="Center" 
-                                       HorizontalOptions="Center"
-                                       FontAttributes="Bold"
-                                       FontSize="16"/>
-                                <Button Text="+" 
-                                        Clicked="OnIncreaseQuantityClicked" 
-                                        CommandParameter="{Binding .}" 
-                                        BackgroundColor="#ccffcc" 
-                                        TextColor="#44aa44" 
-                                        WidthRequest="30"
-                                        HeightRequest="30"
-                                        CornerRadius="15"
-                                        FontAttributes="Bold"
-                                        FontSize="18"/>
-                            </HorizontalStackLayout>
+                            <!-- Quantity Control Section -->
+                            <Frame Grid.Column="2" 
+                                   Grid.Row="0"
+                                   Grid.RowSpan="2"
+                                   BorderColor="#DDDDDD"
+                                   BackgroundColor="#F5F5F5"
+                                   Padding="8,10"
+                                   CornerRadius="8"
+                                   HasShadow="False"
+                                   Margin="0,0,0,0">
+                                <VerticalStackLayout Spacing="5">
+                                    <!-- Quantity Indicator Label -->
+                                    <Label Text="QUANTITY" 
+                                           FontSize="11" 
+                                           TextColor="#555555"
+                                           HorizontalOptions="Center"
+                                           FontAttributes="Bold"
+                                           Margin="0,0,0,2"/>
 
-                            <!-- Remove Button -->
-                            <Button Grid.Column="2"
-                                    Grid.Row="1"
-                                    Text="X"
-                                    BackgroundColor="#ff4444"
-                                    TextColor="White"
-                                    Clicked="OnRemoveItemClicked"
-                                    CommandParameter="{Binding .}"
-                                    HeightRequest="30"
-                                    WidthRequest="30"
-                                    Margin="5,0,0,0"
-                                    CornerRadius="15"
-                                    FontAttributes="Bold"
-                                    FontSize="18"/>
+                                    <!-- Quantity Controls -->
+                                    <HorizontalStackLayout Spacing="6"
+                                                          HorizontalOptions="Center">
+                                        <Button Text="-" 
+                                                Clicked="OnDecreaseQuantityClicked" 
+                                                CommandParameter="{Binding .}" 
+                                                BackgroundColor="#E53935" 
+                                                TextColor="White" 
+                                                WidthRequest="36"
+                                                HeightRequest="40"
+                                                CornerRadius="18"
+                                                FontAttributes="Bold"
+                                                FontSize="20"/>
+                                        <Frame BorderColor="#DDDDDD"
+                                               BackgroundColor="White"
+                                               Padding="5,0"
+                                               CornerRadius="5"
+                                               HasShadow="False"
+                                               MinimumWidthRequest="40"
+                                               VerticalOptions="Center">
+                                            <Label Text="{Binding Quantity}" 
+                                                   VerticalOptions="Center" 
+                                                   HorizontalOptions="Center"
+                                                   FontAttributes="Bold"
+                                                   FontSize="18"
+                                                   HorizontalTextAlignment="Center"/>
+                                        </Frame>
+                                        <Button Text="+" 
+                                                Clicked="OnIncreaseQuantityClicked" 
+                                                CommandParameter="{Binding .}" 
+                                                BackgroundColor="#43A047" 
+                                                TextColor="White" 
+                                                WidthRequest="38"
+                                                HeightRequest="40"
+                                                CornerRadius="18"
+                                                FontAttributes="Bold"
+                                                FontSize="20"/>
+                                    </HorizontalStackLayout>
+
+                                    <!-- Remove Button -->
+                                    <Button Text="REMOVE ITEM"
+                                            BackgroundColor="#FF5252"
+                                            TextColor="White"
+                                            Clicked="OnRemoveItemClicked"
+                                            CommandParameter="{Binding .}"
+                                            HeightRequest="36"
+                                            Margin="0,8,0,0"
+                                            CornerRadius="16"
+                                            FontSize="12"
+                                            FontAttributes="Bold"/>
+                                </VerticalStackLayout>
+                            </Frame>
                         </Grid>
                     </Frame>
                 </DataTemplate>
@@ -137,5 +162,19 @@
                        FontSize="18"/>
             </Grid>
         </Frame>
+
+        <!-- Checkout Button -->
+        <Button Grid.Row="2"
+                Text="Proceed to Checkout"
+                Clicked="OnCheckoutClicked"
+                BackgroundColor="DeepSkyBlue"
+                TextColor="White"
+                FontAttributes="Bold"
+                FontSize="18"
+                CornerRadius="10"
+                Padding="10"
+                HeightRequest="50"
+                Margin="10"
+                HorizontalOptions="Fill"/>
     </Grid>
 </ContentPage>

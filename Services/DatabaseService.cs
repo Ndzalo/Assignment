@@ -174,5 +174,14 @@ namespace Assignment.Services
             // Otherwise, construct the path relative to your app's resources
             return Path.Combine("Resources", "Images", imageUrl);
         }
+        public async Task ClearCartAsync(int profileId)
+        {
+            var cartItems = await GetCartItemsAsync(profileId);
+            foreach (var item in cartItems)
+            {
+                await RemoveFromCartAsync(item.Id);
+            }
+        }
+
     }
 }

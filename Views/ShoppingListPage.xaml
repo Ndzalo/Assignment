@@ -48,7 +48,7 @@
                                 <Label Text="{Binding Description}"
                                        FontSize="14"
                                        TextColor="#666"/>
-                                <Label Text="{Binding Price, StringFormat='${0:N2}'}"
+                                <Label Text="{Binding Price, StringFormat='R{0:N2}'}"
                                        FontSize="16"
                                        TextColor="#007BFF"
                                        FontAttributes="Bold"/>
